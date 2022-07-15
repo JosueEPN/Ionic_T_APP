@@ -1,0 +1,7 @@
+{
+  "name": "TuristAppEnca",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
