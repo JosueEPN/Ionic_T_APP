@@ -2,7 +2,7 @@ import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/r
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route, useParams } from 'react-router-dom';
 import Menu from './components/Menu';
-import Page from './pages/Page';
+import Page from './pages/Turismo/Page';
 import IndexEnca from './pages/Encargado/Index';
 import CreateEnca from './pages/Encargado/create';
 import EditEnca from './pages/Encargado/Edit';
@@ -26,7 +26,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Map from './pages/Map';
+import GoogleMapa1 from './pages/Turismo/GoogleMapa1';
 import Restaurante from './pages/Turismo/Restaurante';
 import Turismo from './pages/Turismo/Turismo';
 import Tienda from './pages/Turismo/Tienda';
@@ -42,7 +42,7 @@ const App: React.FC = () => {
           <Menu />
           <IonRouterOutlet id="main">
             <Route path="/" exact={true}>
-              <Redirect to="/page/Inbox" />
+              <Redirect to="/Encargado/Principal-Page" />
             </Route>
             
             <Route exact path="/page/Parques" component={Parques} />
@@ -52,7 +52,7 @@ const App: React.FC = () => {
             <Route exact path="/Encargado/Principal-Page" component={IndexEnca} />
             <Route exact path="/Encargador/create-site" component={CreateEnca}/>
             <Route exact path='/Encargado/edit/:id' component={EditEnca}/>
-            <Route exact path="/ubication" component={Map}/>
+            <Route path='/map/:id' component={GoogleMapa1}/>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

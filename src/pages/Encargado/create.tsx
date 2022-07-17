@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useReducer }from "react";
+import React, { useEffect, useState }from "react";
 import {IonList, IonItem, IonLabel,IonInput, IonSelect, IonSelectOption,IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton, IonLoading} from '@ionic/react';
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../database/config";
+import { db, storage } from "../../database/config";
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import { ref, uploadBytesResumable,getDownloadURL, uploadBytes} from "firebase/storage";
+import { image } from "ionicons/icons";
 
 
 
@@ -15,8 +17,12 @@ const CreateEnca: React.FC = () => {
   const [descripcion, setDescripcion] = useState('')
   const [lati, setLat] = useState(0)
   const [logi, setLog] = useState(0)
+  const [url1,setUrl1] =useState('')
   const [loading, setLoading] = useState<boolean>(false)
   const [position, setPosition] = useState<Geoposition>()
+  const [Imagen, setImagen] = useState<any>(null);
+  
+
   const lugarCollection = collection(db, "Lugares")
 
   if(!navigator.geolocation){
@@ -24,8 +30,58 @@ const CreateEnca: React.FC = () => {
     throw new Error('Tu navegador no tiene la opcion de ubicacion')
   }
 
+  useEffect (()=>{
+    const uploadFile = () =>{
+
+      const FileName = Imagen.name + '_' + (new Date()).getTime();
+      const storageRef = ref(storage,`/Img/${FileName}`);
+  
+  
+      const uploadTask = uploadBytesResumable(storageRef, Imagen);
+      uploadTask.on('state_changed',
+          (snapshot) => {
+            
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+              case 'paused':
+                console.log('Upload is paused');
+                break;
+              case 'running':
+                console.log('Upload is running');
+                break;
+              default:
+                break;
+            }
+          },
+          (error) => {
+            // Handle unsuccessful uploads
+          },
+        () => {
+         
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            const URLPRI = String(downloadURL)
+            setUrl1(URLPRI)
+            setImagen(null)
+          });
+        }
+      );
+  
+    };
+    Imagen && uploadFile();
+  },[Imagen]);
+
+
+      
  
+
+
   const store = async (e:any) =>{
+
+   
+
+    console.log('este es el url:  ' + url1)
+
     e.preventDefault()
     await addDoc(lugarCollection,{
       nombre:nombre,
@@ -34,6 +90,7 @@ const CreateEnca: React.FC = () => {
       descripcion:descripcion,
       lati:lati,
       logi:logi,
+      url:url1,
 
     })
     setNombre('')
@@ -42,7 +99,8 @@ const CreateEnca: React.FC = () => {
     setDescripcion('')
     setLat(0)
     setLog(0)
-    //<input type="file" name="image" id="image" />
+    setUrl1('')
+  
   }
   
  const getLocation = async() => {
@@ -57,16 +115,28 @@ const CreateEnca: React.FC = () => {
     setLoading(false);
   }
  }
- let pos;
- let pos2;
- if (position) {
-  
-  pos = <IonInput >{lati}</IonInput>
-  pos2= <IonInput >{logi}</IonInput>                    
-}else{
-  pos= <IonInput type="number" value={lati} onIonChange={e=> setLat(parseFloat(e.detail.value!))}></IonInput>
-  pos2= <IonInput type="number" value={logi} onIonChange={e=> setLog(parseFloat(e.detail.value!))}></IonInput>    
-}
+
+  let pos;
+  let pos2;
+   
+  if (position) {      
+    if(lati < 0 || lati > 0){
+    pos = <IonInput >{lati}</IonInput>
+    pos2= <IonInput >{logi}</IonInput>     
+    }else{
+
+      pos = <IonLabel >Vuelva a cargar la coordenadas</IonLabel>
+      pos2= <IonLabel >Vuelva a cargar la coordenadas</IonLabel>
+
+    }
+                   
+  }else{
+    pos= <IonInput type="number" value={lati} onIonChange={e=> setLat(parseFloat(e.detail.value!))}></IonInput>
+    pos2= <IonInput type="number" value={logi} onIonChange={e=> setLog(parseFloat(e.detail.value!))}></IonInput>    
+  }
+ 
+
+
 
      return (
         <IonPage>
@@ -128,9 +198,18 @@ const CreateEnca: React.FC = () => {
 
                 </IonItem>
 
+                <IonItem>
+
+                <IonLabel > Carga una imagen: </IonLabel>
+
+                  
+                 <input type="file" name="imagen" onChange={(event:any) => setImagen(event.target.files[0])} />
+
+                </IonItem>
+
               </IonList>
 
-              <IonButton type="submit" routerLink="/Encargado/Principal-Page"> Crear</IonButton>
+              <IonButton disabled={url1 === ''} type="submit" routerLink="/Encargado/Principal-Page" > Crear</IonButton>
           </form>
 
           

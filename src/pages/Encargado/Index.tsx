@@ -16,6 +16,8 @@ import { pencilOutline,pencilSharp,trashOutline,trashSharp,locationOutline,locat
 import {collection, getDocs,getDoc,deleteDoc, doc} from'firebase/firestore'
 import { db } from "../../database/config";
 import { lugar } from "../../modelo/lugar";
+import { getStorage, ref, getDownloadURL  } from "firebase/storage";
+
 
 
 import { Link } from "react-router-dom";
@@ -28,7 +30,10 @@ const IndexEnca: React.FC = () => {
 
 
   const lugarCollection = collection(db, "Lugares")
+  const storage = getStorage();
 
+
+  
   const getLugares = async () => {
     let lista: lugar[] = []    
     const data = await getDocs(lugarCollection)
@@ -39,13 +44,17 @@ const IndexEnca: React.FC = () => {
         categoria:doc.data().categoria,
         ciudad:doc.data().ciudad,
         descripcion:doc.data().descripcion,
-        lat:doc.data().lat,
-        log:doc.data().log      
+        lati:doc.data().lati,
+        logi:doc.data().logi,
+        url:doc.data().url    
       };
       lista.push(obj);
+      
     });
     console.log(lista);
     setLugares(lista)
+
+
   }
 
 
@@ -77,24 +86,24 @@ const IndexEnca: React.FC = () => {
         <IonContent fullscreen>
         <IonButton expand="block" routerLink="/Encargador/create-site">Añade un lugar</IonButton>
                 <IonList> {
-                    lugares.map(lugar  => (
-                        <IonCard key={lugar.id} >
-                          <img src="" alt={lugar.nombre} />
+                    lugares.map(lugares  => (
+                        <IonCard key={lugares.id} >
+                          <img src={lugares.url} alt={lugares.nombre} />
                             <IonCardHeader>
                                 <IonCardTitle>Nombre: {
-                                    lugar.nombre
+                                    lugares.nombre
                                 }</IonCardTitle>
                             </IonCardHeader>
                             <IonCardContent>
-                               Ciudad: {lugar.ciudad}
+                               Ciudad: {lugares.ciudad}
                             </IonCardContent>
 
-                            <Link to={`/Encargado/edit/${lugar.id}`}>
+                            <Link to={`/Encargado/edit/${lugares.id}`}>
                               <IonButton>
                                 <IonIcon slot="start" ios={pencilOutline} md={pencilSharp} />
                               </IonButton>                              
                             </Link> 
-                            <IonButton onClick={()=> eliminar(''+ lugar.id)} >
+                            <IonButton onClick={()=> eliminar(''+ lugares.id)} >
                               <IonIcon slot="start" ios={trashOutline} md={trashSharp} />
                             </IonButton>                              
                             <IonButton  routerLink="/ubication">

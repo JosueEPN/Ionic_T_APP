@@ -4,8 +4,9 @@ export interface lugar{
     categoria:string,
     ciudad:string,
     descripcion:string,
-    lat:number,
-    log:number
+    lati:number,
+    logi:number,
+    url:string,
     
     
 }
