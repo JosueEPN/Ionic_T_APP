@@ -55,7 +55,7 @@ const App: React.FC = () => {
             <Route exact path="/Encargado/Principal-Page" component={IndexEnca} />
             <Route exact path="/Encargador/create-site" component={CreateEnca}/>
             <Route exact path='/Encargado/edit/:id' component={EditEnca}/>
-            <Route path='/map/:id' component={GoogleMapa1}/>
+            <Route path='/map/:latitud/:longitud' component={GoogleMapa1}/>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

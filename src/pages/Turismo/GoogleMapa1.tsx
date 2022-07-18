@@ -11,41 +11,27 @@ import { coorden } from '../../modelo/coorden';
 
 const GoogleMapa1: React.FC = () => {
 
-  const [coord,  setCoords ] = useState< coorden[] > ([])
-  const key = "AIzaSyD4Sl0FHs2MsTybkr5KGjJuqFc7kNDr_Uc"
+
+  const key = "AIzaSyC4bD6wnyK7XB04RYKmCigjV290N5WByJw"
   let  newMap:any ;
  
 
-   let  {id}:{id:string} = useParams();
+   let  {lati}:{lati:any} = useParams();
+   let  {logi}:{logi:any} = useParams();
+
+   var latitud = parseFloat(lati)
+   var longitud = parseFloat(logi)
+
+
 
    const lugarCollection = collection(db, "Lugares")
 
-   const getLugar = async () => {
-    let lista: coorden[] = []   
-    const data = await getDocs(lugarCollection)
-    data.forEach((doc) => {
-      if(id == doc.id){     
-        let obj = {
-
-          nombre:doc.data().nombre,       
-          lati:doc.data().lati,
-          logi:doc.data().logi,
-     
-        };
-        lista.push(obj);  
-        console.log(doc.data())  
-        console.log(obj)  
-        console.log(lista)   
-        
-      }
-      
-    });
-    setCoords(lista)    
-    console.log(coord)
-      
+   const getLugar = () => {
 
 
-   
+
+ 
+
   }
 
 
@@ -54,8 +40,8 @@ const GoogleMapa1: React.FC = () => {
    const [mapConfig, setMapConfing] =useState({
     zoom: 12,
     center:{
-      lat:0,
-      lng:0
+      lat:latitud,
+      lng:longitud
     },
     androidLiteMode: false,
    })
@@ -81,10 +67,10 @@ const GoogleMapa1: React.FC = () => {
 
     await newMap.addMarkers({
       coordinate: {
-        lat: 33.6,
-        lng: -117.9,
+        lat: lati,
+        lng: logi,
       },
-      title: 'Hello world',
+      title: 'Esta es su ubicacion',
     });
   }
 

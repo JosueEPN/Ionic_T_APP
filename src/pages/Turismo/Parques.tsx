@@ -91,7 +91,7 @@ const Parques: React.FC = () => {
                          <IonButton id="open-modal1" expand="block">
                            Ver
                          </IonButton>
-                         <Link to={`/map/${lugares.id}`}>
+                         <Link to={`/map/${lugares.lati}/${lugares.logi}`}>
                             <IonButton  expand="block">
                                 <IonIcon slot="start" ios={locationOutline} md={locateSharp} />
                             </IonButton>  

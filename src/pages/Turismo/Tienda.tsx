@@ -94,7 +94,7 @@ const Tienda: React.FC = () => {
                            Ver
                          </IonButton>
 
-                         <Link to={`/map/${lugares.id}`}>
+                         <Link to={`/map/${lugares.lati}/${lugares.logi}`}>
                             <IonButton  expand="block">
                                 <IonIcon slot="start" ios={locationOutline} md={locateSharp} />
                             </IonButton>  

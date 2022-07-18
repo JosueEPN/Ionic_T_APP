@@ -98,15 +98,10 @@ const IndexEnca: React.FC = () => {
                                Ciudad: {lugares.ciudad}
                             </IonCardContent>
 
-                            <Link to={`/Encargado/edit/${lugares.id}`}>
-                              <IonButton>
-                                <IonIcon slot="start" ios={pencilOutline} md={pencilSharp} />
-                              </IonButton>                              
-                            </Link> 
                             <IonButton onClick={()=> eliminar(''+ lugares.id)} >
                               <IonIcon slot="start" ios={trashOutline} md={trashSharp} />
                             </IonButton>                              
-                            <Link to={`/map/${lugares.id}`}>
+                            <Link to={`/map/${lugares.lati}/${lugares.logi}`}>
                             <IonButton  >
                                 <IonIcon slot="start" ios={locationOutline} md={locateSharp} />
                             </IonButton>  
