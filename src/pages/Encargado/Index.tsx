@@ -106,9 +106,12 @@ const IndexEnca: React.FC = () => {
                             <IonButton onClick={()=> eliminar(''+ lugares.id)} >
                               <IonIcon slot="start" ios={trashOutline} md={trashSharp} />
                             </IonButton>                              
-                            <IonButton  routerLink="/ubication">
-                              <IonIcon slot="start" ios={locationOutline} md={locateSharp} />
-                            </IonButton>      
+                            <Link to={`/map/${lugares.id}`}>
+                            <IonButton  >
+                                <IonIcon slot="start" ios={locationOutline} md={locateSharp} />
+                            </IonButton>  
+                          </Link>
+    
                         </IonCard>
                     )) }
                  </IonList>

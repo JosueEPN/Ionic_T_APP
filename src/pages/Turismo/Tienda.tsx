@@ -94,6 +94,13 @@ const Tienda: React.FC = () => {
                            Ver
                          </IonButton>
 
+                         <Link to={`/map/${lugares.id}`}>
+                            <IonButton  expand="block">
+                                <IonIcon slot="start" ios={locationOutline} md={locateSharp} />
+                            </IonButton>  
+                          </Link>
+
+
 
 
                          <IonModal ref={modal} trigger="open-modal">
@@ -122,9 +129,7 @@ const Tienda: React.FC = () => {
                              {lugares.ciudad}                             
                            </IonItem>
 
-                             <IonButton  disabled={url == 0} routerLink="/ubication">
-                               <IonIcon slot="start" ios={locationOutline} md={locateSharp} />
-                             </IonButton>  
+                    
                          </IonContent>
                        </IonModal>
                      </IonCard>

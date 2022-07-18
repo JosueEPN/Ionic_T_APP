@@ -34,7 +34,10 @@ import Parques from './pages/Turismo/Parques';
 
 setupIonicReact();
 
+
 const App: React.FC = () => {
+  
+
   return (
     <IonApp>
       <IonReactRouter>
