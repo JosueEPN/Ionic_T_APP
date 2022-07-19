@@ -9,8 +9,12 @@ const Map: React.FC = () => {
     const [mapConfig, setMapConfig] = useState({
          	
 
-        zoom: 12
+        zoom: 12,
+        center: { lat: -33, lng: 151 }
+        
     });
+
+    
 
     const creteMap = async() => {
 
@@ -22,6 +26,8 @@ const Map: React.FC = () => {
            config:mapConfig
         });
     }
+
+    
 
     useIonViewWillEnter(()=> creteMap());
 

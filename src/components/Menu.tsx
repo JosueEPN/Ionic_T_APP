@@ -11,7 +11,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { restaurantOutline,restaurantSharp, basketOutline, basketSharp, leafOutline,leafSharp, locationOutline, locationSharp, peopleCircleOutline, peopleCircleSharp } from 'ionicons/icons';
+import { restaurantOutline,restaurantSharp, basketOutline, basketSharp, leafOutline,leafSharp, locationOutline, locationSharp, peopleCircleOutline, peopleCircleSharp, thermometerOutline, thermometerSharp, personAddOutline, personAddSharp } from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -46,12 +46,14 @@ const appPages: AppPage[] = [
     iosIcon: leafOutline,
     mdIcon: leafSharp
   },
+ 
   {
-    title: 'Encargado',
-    url: '/Encargado/Principal-Page',
-    iosIcon: peopleCircleOutline,
-    mdIcon: peopleCircleSharp
+    title: 'Turista',
+    url: '/Turista/Principal-Page',
+    iosIcon: personAddOutline,
+    mdIcon: personAddSharp
   },
+ 
 ];
 const Menu: React.FC = () => {
   const location = useLocation();
@@ -60,8 +62,8 @@ const Menu: React.FC = () => {
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
+          <IonListHeader>TURISTA</IonListHeader>
+          <IonNote>Agencia de turismo Avengers</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>

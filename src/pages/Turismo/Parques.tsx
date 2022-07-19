@@ -67,7 +67,7 @@ const Parques: React.FC = () => {
         </IonHeader>
   
         <IonContent fullscreen>
-                <IonList> {lugares.filter( lugar => lugar.categoria == "Turistico").map( lugar  => (
+                <IonList> {lugares.filter( lugar => lugar.categoria == "Parques").map( lugar  => (
                         <IonCard key={lugar.id} >
                           <img src="" alt={lugar.nombre} />
                             <IonCardHeader>

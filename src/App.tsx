@@ -6,6 +6,9 @@ import Page from './pages/Page';
 import IndexEnca from './pages/Encargado/Index';
 import CreateEnca from './pages/Encargado/create';
 import EditEnca from './pages/Encargado/Edit';
+import IndexTurist from './pages/Turista/Index';
+import CreateTurist from './pages/Turista/create';
+import EditTurist from './pages/Turista/Edit';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -52,6 +55,9 @@ const App: React.FC = () => {
             <Route exact path="/Encargado/Principal-Page" component={IndexEnca} />
             <Route exact path="/Encargador/create-site" component={CreateEnca}/>
             <Route exact path='/Encargado/edit/:id' component={EditEnca}/>
+            <Route exact path="/Turista/Principal-Page" component={IndexTurist} />
+            <Route exact path="/Turistear/create-site" component={CreateTurist}/>
+            <Route exact path='/Turista/edit/:id' component={EditTurist}/>
             <Route exact path="/ubication" component={Map}/>
           </IonRouterOutlet>
         </IonSplitPane>
