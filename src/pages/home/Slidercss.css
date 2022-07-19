@@ -1,0 +1,33 @@
+.swiper-container {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.title-card{
+  transform: translate(0rem, -3rem);
+  max-width: 19rem;
+  color: white;
+}
+.container-list{
+  margin-top: 3rem;
+  top:9rem;
+  position: relative;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; */
+}
